@@ -1,0 +1,1 @@
+Câu hỏi phản biện : Tại sao PHP có thể nhúng vào HTML một cách tự nhiên?Các ngôn ngữ server khác có làm vậy không?

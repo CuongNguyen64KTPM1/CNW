@@ -1,0 +1,6 @@
+B.
+1. Request URL : https://tlu.edu.vn/
+2. Request Method : GET
+3. Status Code : 200 OK
+C.
+Câu hỏi phản biện của em: Ở phần status code xuất hiện số 200 và biểu tượng màu tròn xanh, tại sao là 200 và có biểu tượng như vậy và nó tác dộng như nào vs Web
