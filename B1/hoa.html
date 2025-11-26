@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Các Loài Hoa Tuyệt Đẹp</title>
+  <style>
+    /* Global */
+    :root{--accent:#e94b6b;--muted:#666;--bg:#f4f4f6}
+    html,body{height:100%;margin:0;font-family:"Segoe UI", Roboto, "Helvetica Neue", Arial;background:var(--bg);color:#222}
+
+    /* Top nav / site header (mimic afamily) */
+    .topbar{background:var(--accent);color:#fff;padding:8px 0}
+    .topbar .wrap{max-width:1150px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:18px}
+    .logo{font-weight:700;letter-spacing:1px}
+    .nav{display:flex;gap:14px;font-size:13px;opacity:0.95}
+
+    /* Page layout */
+    .wrap-main{max-width:1150px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:1fr 320px;gap:24px}
+
+    /* Article column */
+    .article{background:#fff;padding:30px;border-radius:6px;box-shadow:0 6px 20px rgba(30,30,30,0.06)}
+    .article h1{margin:0 0 8px;font-size:26px}
+    .meta{color:var(--muted);font-size:13px;margin-bottom:18px}
+    .lead{font-size:16px;line-height:1.7;color:#333}
+
+    .article img.feature{width:100%;max-width:740px;display:block;margin:18px auto;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,0.06);object-fit:cover}
+
+    .article p{line-height:1.7;color:#333}
+    .article ol{margin-left:18px}
+    .article li{margin:18px 0}
+
+    /* Sidebar */
+    .sidebar{display:flex;flex-direction:column;gap:18px}
+    .ad{background:#fff;padding:12px;border-radius:6px;text-align:center;box-shadow:0 6px 16px rgba(20,20,20,0.04)}
+    .ad img{max-width:100%;height:auto}
+
+    /* Footer small */
+    footer{max-width:1150px;margin:18px auto;text-align:center;color:var(--muted);font-size:13px}
+
+    /* Responsive */
+    @media (max-width:980px){.wrap-main{grid-template-columns:1fr 260px}}
+    @media (max-width:840px){.wrap-main{grid-template-columns:1fr}.sidebar{order:2}}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="logo">Nguyễn&nbsp;Minh Cường</div>
+      <div style="margin-left:auto"> <button id="btnAdmin" style="background:#fff;color:var(--accent);border-radius:6px;padding:6px 10px;border:none;cursor:pointer">Đăng nhập Admin</button></div>
+    </div>
+  </div>
+
+  <main class="wrap-main">
+    <article class="article" id="article">
+      <h1>Các loại hoa tuyệt đẹp thích hợp trồng để khoe hương sắc dịp xuân — hè</h1>
+      
+
+      <p class="lead">Dưới đây là 4 loài hoa phù hợp để trồng trang trí nhà cửa, ban công hoặc sân vườn trong dịp xuân hè</p>
+
+      <ul id="list">
+        <!-- items injected by JS -->
+      </ul>
+    </article>
+  </main>
+
+  <script>
+    // Dữ liệu đơn giản (tên + mô tả + ảnh)
+    const flowers = [
+      {name:'Hoa Tường Vy',desc:'Hoa tường vy có ý nghĩa chung về sự kiên cường, bền bỉ và tình yêu. Tùy thuộc vào màu sắc, hoa còn mang những ý nghĩa cụ thể như tình yêu nồng cháy (hồng đỏ), hẹn ước chung thủy (hồng phấn), tình yêu trong sáng (trắng) hay sự may mắn, hạnh phúc (vàng). Về phong thủy, cây tường vi được xem là biểu tượng của sự may mắn, tài lộc và có thể giúp cân bằng sinh khí cho ngôi nhà.',img:'images/tuongvy.jpg'},
+      {name:'Hoa Đỗ Quyên',desc:'Hoa đỗ quyên mang nhiều ý nghĩa, trong đó có biểu tượng cho tình yêu chung thủy, sự may mắn và thịnh vượng, niềm vui và hạnh phúc gia đình. Ý nghĩa này thay đổi tùy theo màu sắc của hoa, như màu đỏ tượng trưng cho tình yêu nồng cháy, màu hồng/tím cho sự vui vẻ, và màu vàng cho tình bạn. Ngoài ra, hoa đỗ quyên còn có ý nghĩa về sự sum vầy, đoàn viên, đặc biệt vào dịp Tết.',img:'images/doquyen.jpg'},
+      {name:'Hoa Hải Đường',desc:'Hoa hải đường mang ý nghĩagiàu sang, phú quý, thịnh vượng và may mắn, đặc biệt trong dịp Tết, bởi chữ "Đường" trong tên gọi có nghĩa là ngôi nhà lớn. Mỗi màu hoa lại có ý nghĩa riêng: hải đường đỏ tượng trưng cho sự may mắn, bình an, phú quý; hải đường vàng đại diện cho trường thọ, sức khỏe; còn hải đường trắng biểu trưng cho sự khởi đầu mới, trong trắng, cao quý.',img:'images/haiduong.jpg'},
+      {name:'Hoa Mai',desc:'Hoa mai mang nhiều ý nghĩa sâu sắc trong văn hóa Việt Nam, đặc biệt là vào dịp Tết Nguyên Đán, tượng trưng cho sự may mắn, tài lộc, thịnh vượng và một khởi đầu mới tốt đẹp. Ngoài ra, hoa mai còn tượng trưng cho sự kiên cường, ý chí bất khuất vì sức sống mãnh liệt trong điều kiện khắc nghiệt.',img:'images/mai.jpg'}
+    ];
+
+    const list = document.getElementById('list');
+
+    flowers.forEach((f,idx)=>{
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <h2 style="margin:0 0 6px;font-size:18px">${idx+1}. ${escapeHtml(f.name)}</h2>
+        <p style="margin:0 0 10px;color:var(--muted)">${escapeHtml(f.desc)}</p>
+        <img class="feature" src="${f.img}" alt="${escapeHtml(f.name)}" onerror="this.style.display='none'">
+      `;
+      list.appendChild(li);
+    });
+
+    // simple escape
+    function escapeHtml(s){return String(s).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]||c));}
+
+    // Admin button — open original admin from previous version (local-storage)
+    document.getElementById('btnAdmin').addEventListener('click',()=>{
+      // open a small admin UI overlay to edit images/names
+      const pwd = prompt('Nhập mật khẩu admin (mặc định: admin123)');
+      if(pwd !== 'admin123') { if(pwd!==null) alert('Mật khẩu sai'); return; }
+      // create simple admin overlay
+      const overlay = document.createElement('div'); overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999';
+      const panel = document.createElement('div'); panel.style.cssText='width:900px;max-width:95%;background:#fff;padding:16px;border-radius:8px;max-height:80vh;overflow:auto';
+      panel.innerHTML = '<h3>Admin (thêm/sửa/xóa)</h3>'; 
+      const table = document.createElement('div'); table.style.cssText='display:grid;grid-template-columns:1fr 220px;gap:12px;align-items:start';
+      const left = document.createElement('div'); const right = document.createElement('div');
+      left.innerHTML = '<div id="adminList"></div>';
+      right.innerHTML = `
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <input id="aName" placeholder="Tên hoa">
+          <input id="aImg" placeholder="images/flowerX.jpg">
+          <textarea id="aDesc" rows="4" placeholder="Mô tả"></textarea>
+          <div style="display:flex;gap:8px"><button id="addNew">Thêm mới</button><button id="closeAdmin">Đóng</button></div>
+        </div>`;
+      table.appendChild(left); table.appendChild(right); panel.appendChild(table);
+      overlay.appendChild(panel); document.body.appendChild(overlay);
+
+      function renderAdminList(){
+        const adminList = panel.querySelector('#adminList'); adminList.innerHTML='';
+        flowers.forEach((f,i)=>{
+          const row = document.createElement('div'); row.style.cssText='padding:8px;border-bottom:1px solid #eee;display:flex;gap:8px;align-items:center';
+          row.innerHTML = `<div style="flex:1"><strong>${i+1}. ${escapeHtml(f.name)}</strong><div style="color:var(--muted);font-size:13px">${escapeHtml(f.desc)}</div></div><div style="width:120px;text-align:right"><button data-i="${i}" class="edit">Sửa</button> <button data-i="${i}" class="del">Xóa</button></div>`;
+          adminList.appendChild(row);
+        });
+        adminList.querySelectorAll('.edit').forEach(btn=>btn.addEventListener('click',e=>{
+          const i = +e.currentTarget.dataset.i; const item = flowers[i]; panel.querySelector('#aName').value = item.name; panel.querySelector('#aDesc').value=item.desc; panel.querySelector('#aImg').value=item.img; panel.querySelector('#addNew').dataset.editIndex = i;
+        }));
+        adminList.querySelectorAll('.del').forEach(btn=>btn.addEventListener('click',e=>{
+          const i = +e.currentTarget.dataset.i; if(!confirm('Xóa mục này?')) return; flowers.splice(i,1); renderAdminList(); renderArticle();
+        }));
+      }
+
+      panel.querySelector('#addNew').addEventListener('click',e=>{
+        const name = panel.querySelector('#aName').value.trim(); const img = panel.querySelector('#aImg').value.trim(); const desc = panel.querySelector('#aDesc').value.trim();
+        if(!name) return alert('Nhập tên');
+        const editIndex = e.currentTarget.dataset.editIndex;
+        if(editIndex!==undefined && editIndex!==null && editIndex!==''){
+          flowers[+editIndex] = {name,desc,img:img||flowers[+editIndex].img}; e.currentTarget.dataset.editIndex='';
+        } else {
+          flowers.push({name,desc,img:img||'images/placeholder.jpg'});
+        }
+        panel.querySelector('#aName').value='';panel.querySelector('#aImg').value='';panel.querySelector('#aDesc').value='';
+        renderAdminList(); renderArticle();
+      });
+
+      panel.querySelector('#closeAdmin').addEventListener('click',()=>document.body.removeChild(overlay));
+
+      renderAdminList();
+    });
+
+    function renderArticle(){
+      const ol = document.getElementById('list'); ol.innerHTML='';
+      flowers.forEach((f,idx)=>{
+        const li = document.createElement('li');
+        li.innerHTML = `<h2 style="margin:0 0 6px;font-size:18px">${idx+1}. ${escapeHtml(f.name)}</h2><p style="margin:0 0 10px;color:var(--muted)">${escapeHtml(f.desc)}</p><img class="feature" src="${f.img}" alt="${escapeHtml(f.name)}" onerror="this.style.display='none'">`;
+        ol.appendChild(li);
+      });
+    }
+
+    // initial render (in case admin edited previously in this session)
+    renderArticle();
+  </script>
+</body>
+</html>
