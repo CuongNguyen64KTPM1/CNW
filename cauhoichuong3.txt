@@ -1,0 +1,1 @@
+Tại sao session_start() thường cần cookie để hoạt động? Nếu người dùng tắt cookie thì sao?
