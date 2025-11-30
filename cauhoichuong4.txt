@@ -1,0 +1,1 @@
+Câu hỏi của em: Ngoài phpMyAdmin thì còn cách nào có thể kết nối cơ sở dữ liệu tối ưu hơn nữa không và khả năng an toàn của phpadmin có cao nhất không
