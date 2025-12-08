@@ -1,0 +1,1 @@
+Câu hỏi của em là : Phần view chạy theo như thế nào trong mô hình MVC ?
